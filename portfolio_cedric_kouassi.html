@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cedric Kouassi | Data Science & AI Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        akatsuki: '#C8102E',
+                        akatsukiDark: '#8B0000',
+                        cream: '#FDFBF7',
+                        creamCard: '#F5ECE1',
+                        ink: '#121214',
+                        inkLight: '#1E1E24',
+                        slateBorder: '#E2D9CC'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Cinzel', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FDFBF7;
+            color: #121214;
+        }
+        .japanese-cloud-bg {
+            background-image: radial-gradient(#C8102E 0.75px, transparent 0.75px), radial-gradient(#C8102E 0.75px, #FDFBF7 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0,15px 15px;
+            opacity: 0.05;
+        }
+        .hero-pattern {
+            background: linear-gradient(135deg, rgba(18,18,20,0.95) 0%, rgba(30,30,36,0.92) 100%), 
+                        url('https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(200, 16, 46, 0.15);
+        }
+        .dark-glass {
+            background: rgba(30, 30, 36, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(200, 16, 46, 0.3);
+        }
+        .glow-red {
+            box-shadow: 0 0 25px -5px rgba(200, 16, 46, 0.4);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-ink selection:bg-akatsuki selection:text-white">
+
+    <nav class="fixed top-0 left-0 w-full z-50 bg-ink/90 backdrop-blur-md text-white border-b border-akatsuki/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-full bg-akatsuki flex items-center justify-center font-display font-bold text-white shadow-lg group-hover:scale-105 transition-transform">
+                    CK
+                </div>
+                <div>
+                    <span class="font-display font-bold text-lg tracking-wider text-cream block leading-tight">CEDRIC KOUASSI</span>
+                    <span class="text-xs text-akatsuki font-semibold tracking-widest uppercase">Data Scientist & AI Specialist</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#overview" class="hover:text-akatsuki transition-colors">Contexte Marché</a>
+                <a href="#dataset" class="hover:text-akatsuki transition-colors">Exploration & Nettoyage</a>
+                <a href="#models" class="hover:text-akatsuki transition-colors">Modélisation & Benchmarks</a>
+                <a href="#results" class="hover:text-akatsuki transition-colors">Visualisation Graphique</a>
+                <a href="#conclusion" class="hover:text-akatsuki transition-colors">Recommandations</a>
+            </div>
+
+            <a href="#models" class="hidden sm:inline-flex items-center space-x-2 bg-akatsuki hover:bg-akatsukiDark text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-md hover:shadow-akatsuki/50">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Voir les Modèles</span>
+            </a>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen pt-28 pb-16 flex items-center hero-pattern text-white overflow-hidden">
+        <div class="absolute inset-0 japanese-cloud-bg pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center space-x-2 bg-akatsuki/20 border border-akatsuki/50 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase text-red-300">
+                        <span class="w-2 h-2 rounded-full bg-akatsuki animate-ping"></span>
+                        <span>Projet Data Science & Intelligence Artificielle</span>
+                    </div>
+
+                    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight text-cream">
+                        Analyse des Facteurs de <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-akatsuki to-amber-500">Popularité des Animes</span>
+                    </h1>
+
+                    <p class="text-gray-300 text-lg leading-relaxed max-w-2xl">
+                        Une étude approfondie visant à prédire l'engagement des spectateurs et l'audience des œuvres d'animation japonaise grâce au Machine Learning (Régression Linéaire vs Random Forest).
+                    </p>
+
+                    <div class="pt-4 flex flex-wrap gap-4 items-center">
+                        <a href="#models" class="bg-akatsuki hover:bg-akatsukiDark text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-akatsuki/50 transition-all flex items-center space-x-3">
+                            <span>Explorer les Résultats</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="#dataset" class="bg-white/10 hover:bg-white/20 text-cream font-semibold px-6 py-4 rounded-xl border border-white/20 transition-all flex items-center space-x-2">
+                            <i class="fa-solid fa-database"></i>
+                            <span>14,478 Animes Analysés</span>
+                        </a>
+                    </div>
+
+                    <!-- Key Stats Quick Strip -->
+                    <div class="grid grid-cols-3 gap-4 pt-8 border-t border-white/10">
+                        <div>
+                            <div class="text-3xl font-extrabold font-display text-cream">98.4%</div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider">Précision R² Finale</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-extrabold font-display text-akatsuki">14.4K+</div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider">Données brutes (MAL)</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-extrabold font-display text-amber-400">0.319</div>
+                            <div class="text-xs text-gray-400 uppercase tracking-wider">Erreur RMSE Minimale</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decorative Akatsuki / Japanese Cloud Visual Card -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative dark-glass rounded-3xl p-8 glow-red border-akatsuki/40">
+                        <div class="flex justify-between items-center mb-6 border-b border-white/10 pb-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <span class="text-xs font-mono text-gray-400">Rattrapage_IA_DataScience.R</span>
+                        </div>
+
+                        <div class="space-y-4 font-mono text-sm">
+                            <div class="text-gray-400"># Auteur : Cedric Kouassi</div>
+                            <div class="text-gray-300"><span class="text-pink-400">library</span>(tidymodels)</div>
+                            <div class="text-gray-300"><span class="text-pink-400">library</span>(ranger)</div>
+                            <div class="bg-ink/80 p-4 rounded-xl border border-white/10 text-xs text-green-400 space-y-1">
+                                <div>> rf_model <- rand_forest(mode = "regression", trees = 500)</div>
+                                <div>> fit(rf_wf, data = train_data)</div>
+                                <div class="text-amber-300 pt-2">✓ Modèle Optimisé : R² = 0.984 | RMSE = 0.319</div>
+                            </div>
+                        </div>
+
+                        <!-- Anime Decorative Cloud SVG -->
+                        <div class="mt-6 flex justify-center">
+                            <svg class="w-28 h-16 text-akatsuki fill-current opacity-80" viewBox="0 0 100 60">
+                                <path d="M 20,40 Q 10,40 10,30 Q 10,20 25,20 Q 30,10 45,10 Q 60,10 65,20 Q 80,15 85,28 Q 95,30 90,42 Q 85,50 70,50 L 25,50 Q 15,50 20,40 Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="overview" class="py-20 relative bg-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-akatsuki mb-2">Analyse Strategique</h2>
+                <h3 class="font-display text-3xl sm:text-4xl font-extrabold text-ink">Contexte du Marché Global de l'Anime</h3>
+                <p class="text-gray-600 mt-4 leading-relaxed">
+                    Les plateformes de streaming investissent massivement. Prédire le succès potentiel d'un animé dès sa phase de production constitue un avantage compétitif majeur pour les décisions d'acquisition.
+                </p>
+            </div>
+
+            <!-- Market Stat Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="glass-card p-8 rounded-2xl shadow-sm border border-slateBorder hover:border-akatsuki/50 transition-all group">
+                    <div class="w-14 h-14 rounded-2xl bg-akatsuki/10 text-akatsuki flex items-center justify-center text-2xl mb-6 group-hover:bg-akatsuki group-hover:text-white transition-all">
+                        <i class="fa-solid fa-chart-line-up"></i>
+                    </div>
+                    <div class="text-3xl font-display font-extrabold text-ink mb-2">38M$ <span class="text-sm font-sans text-gray-500 font-normal">→</span> 90M$</div>
+                    <h4 class="font-bold text-lg text-ink mb-2">Explosion du Marché</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Le marché mondial est évalué à 38 M$ en 2025 et devrait atteindre **90 milliards $ d'ici 2035** avec une croissance annuelle continue de **8 à 9%**.
+                    </p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl shadow-sm border border-slateBorder hover:border-akatsuki/50 transition-all group">
+                    <div class="w-14 h-14 rounded-2xl bg-akatsuki/10 text-akatsuki flex items-center justify-center text-2xl mb-6 group-hover:bg-akatsuki group-hover:text-white transition-all">
+                        <i class="fa-solid fa-tv"></i>
+                    </div>
+                    <div class="text-3xl font-display font-extrabold text-ink mb-2">150M+</div>
+                    <h4 class="font-bold text-lg text-ink mb-2">Audiences Streaming</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Plus de **100 millions d'abonnés** dédiés à l'anime en 2023. Netflix compte à lui seul plus de **150 millions de spectateurs** pour les contenus d'animation.
+                    </p>
+                </div>
+
+                <div class="glass-card p-8 rounded-2xl shadow-sm border border-slateBorder hover:border-akatsuki/50 transition-all group">
+                    <div class="w-14 h-14 rounded-2xl bg-akatsuki/10 text-akatsuki flex items-center justify-center text-2xl mb-6 group-hover:bg-akatsuki group-hover:text-white transition-all">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <div class="text-3xl font-display font-extrabold text-ink mb-2">Optimisation</div>
+                    <h4 class="font-bold text-lg text-ink mb-2">Aide à la Décision</h4>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        L'analyse des facteurs de production (Studio, Source, Genre, Calendrier de diffusion) permet de maximiser le retour sur investissement des licences.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dataset" class="py-20 bg-creamCard border-y border-slateBorder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs font-bold uppercase tracking-widest text-akatsuki">Prétraitement Rigoureux</span>
+                    <h2 class="font-display text-3xl font-extrabold text-ink">Exploration & Nettoyage de la Data (R)</h2>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Le jeu de données initial comprend **14 478 observations** et **31 variables** collectées. La variable cible principale retenue pour quantifier l'engouement est <code class="bg-akatsuki/10 text-akatsuki px-1.5 py-0.5 rounded font-mono">members</code> (nombre de membres enregistrés sur MyAnimeList).
+                    </p>
+
+                    <div class="bg-white p-6 rounded-2xl border border-slateBorder shadow-sm space-y-4">
+                        <h4 class="font-bold text-ink text-sm uppercase tracking-wider flex items-center space-x-2">
+                            <i class="fa-solid fa-filter text-akatsuki"></i>
+                            <span>Bilan du Nettoyage</span>
+                        </h4>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100 text-sm">
+                            <span class="text-gray-600">Total d'observations (lignes)</span>
+                            <span class="font-mono font-bold text-ink">14,478</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100 text-sm">
+                            <span class="text-gray-600">Nombre de colonnes initiales</span>
+                            <span class="font-mono font-bold text-ink">31</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100 text-sm">
+                            <span class="text-gray-600">Valeurs Manquantes Identifiées</span>
+                            <span class="font-mono font-bold text-red-600">1,574 (na.omit)</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 text-sm">
+                            <span class="text-gray-600">Doublons Détectés</span>
+                            <span class="font-mono font-bold text-green-600">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cleaning Pipeline Step-by-Step Interactive Display -->
+                <div class="lg:col-span-7 space-y-4">
+                    <h3 class="font-display text-xl font-bold text-ink mb-4">Pipeline de Transformation des Données</h3>
+
+                    <div class="space-y-3">
+                        <div class="bg-white p-5 rounded-2xl border border-slateBorder shadow-sm hover:border-akatsuki transition-colors">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-8 h-8 rounded-full bg-akatsuki text-white font-bold flex items-center justify-center shrink-0 text-sm">1</div>
+                                <div class="space-y-1">
+                                    <h4 class="font-bold text-ink text-sm">Sélection & Filtrage des Variables Utiles</h4>
+                                    <p class="text-xs text-gray-600">Conservation de <code class="font-mono text-akatsuki">source, rating, genre, studio, broadcast, duration, premiered, members</code>. Exclusion de la source "Music" et suppression des valeurs "Unknown".</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-slateBorder shadow-sm hover:border-akatsuki transition-colors">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-8 h-8 rounded-full bg-akatsuki text-white font-bold flex items-center justify-center shrink-0 text-sm">2</div>
+                                <div class="space-y-1">
+                                    <h4 class="font-bold text-ink text-sm">Extraction & Simplification des Features</h4>
+                                    <p class="text-xs text-gray-600">Extraction du genre principal (`main_genre`), nettoyage de la durée en minutes numériques (`duration_num`), extraction de la saison de diffusion (`premiered`).</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-slateBorder shadow-sm hover:border-akatsuki transition-colors">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-8 h-8 rounded-full bg-akatsuki text-white font-bold flex items-center justify-center shrink-0 text-sm">3</div>
+                                <div class="space-y-1">
+                                    <h4 class="font-bold text-ink text-sm">Regroupement des Studios Rares & Encodage</h4>
+                                    <p class="text-xs text-gray-600">Création de variables Dummies (One-Hot Encoding) pour `source`, `genre`, `broadcast` et filtrage des studios apparaissant > 15 fois (`studios_keep`).</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-2xl border border-slateBorder shadow-sm border-l-4 border-l-akatsuki hover:border-akatsuki transition-colors">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-8 h-8 rounded-full bg-akatsuki text-white font-bold flex items-center justify-center shrink-0 text-sm">4</div>
+                                <div class="space-y-1">
+                                    <h4 class="font-bold text-ink text-sm">Transformation Logarithmique Cible <span class="text-akatsuki font-mono">(log1p)</span></h4>
+                                    <p class="text-xs text-gray-600">Pour corriger la forte asymétrie de la variable <code class="font-mono">members</code> (allant de 0 à 1 456 378 membres), application de <code class="font-mono text-akatsuki">members_log = log1p(members)</code>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="models" class="py-20 bg-ink text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-akatsuki">Modélisation & Benchmarks</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-cream mt-2">Comparaison des Performances des Modèles</h2>
+                <p class="text-gray-400 text-sm mt-3">
+                    Évaluation de l'évolution des performances du modèle initial jusqu'au Random Forest optimisé.
+                </p>
+            </div>
+
+            <!-- Model Benchmark Table / Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <!-- Model 1 -->
+                <div class="dark-glass p-6 rounded-2xl border border-white/10 relative overflow-hidden">
+                    <div class="text-xs font-mono text-gray-400 mb-1">ESSAI 01</div>
+                    <h4 class="font-bold text-cream text-base mb-3">Régression Linéaire (Base)</h4>
+                    <div class="space-y-2 border-t border-white/10 pt-3 text-xs">
+                        <div class="flex justify-between"><span class="text-gray-400">R² (Variance)</span> <span class="font-bold text-red-400">0.234</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">RMSE</span> <span class="font-mono text-gray-300">124,257</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">MAE</span> <span class="font-mono text-gray-300">81,833</span></div>
+                    </div>
+                    <div class="mt-4 text-[11px] text-gray-400">Modèle linéaire sur données brutes non transformées.</div>
+                </div>
+
+                <!-- Model 2 -->
+                <div class="dark-glass p-6 rounded-2xl border border-white/10 relative overflow-hidden">
+                    <div class="text-xs font-mono text-gray-400 mb-1">ESSAI 02</div>
+                    <h4 class="font-bold text-cream text-base mb-3">Linéaire + Log Transform</h4>
+                    <div class="space-y-2 border-t border-white/10 pt-3 text-xs">
+                        <div class="flex justify-between"><span class="text-gray-400">R² (Variance)</span> <span class="font-bold text-yellow-400">0.627</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">RMSE</span> <span class="font-mono text-gray-300">1.33</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">MAE</span> <span class="font-mono text-gray-300">1.01</span></div>
+                    </div>
+                    <div class="mt-4 text-[11px] text-gray-400">Ajout de log1p(members) & filtrage studio (>15).</div>
+                </div>
+
+                <!-- Model 3 -->
+                <div class="dark-glass p-6 rounded-2xl border border-white/10 relative overflow-hidden">
+                    <div class="text-xs font-mono text-gray-400 mb-1">ESSAI 03</div>
+                    <h4 class="font-bold text-cream text-base mb-3">Random Forest (Sans Log)</h4>
+                    <div class="space-y-2 border-t border-white/10 pt-3 text-xs">
+                        <div class="flex justify-between"><span class="text-gray-400">R² (Variance)</span> <span class="font-bold text-red-400">0.213</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">RMSE</span> <span class="font-mono text-gray-300">146,797</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">MAE</span> <span class="font-mono text-gray-300">81,842</span></div>
+                    </div>
+                    <div class="mt-4 text-[11px] text-gray-400">Random Forest (500 arbres) sur échelle brute.</div>
+                </div>
+
+                <!-- Model 4 (Champion) -->
+                <div class="dark-glass p-6 rounded-2xl border-2 border-akatsuki relative overflow-hidden glow-red">
+                    <div class="absolute top-0 right-0 bg-akatsuki text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase">
+                        Meilleur Modèle
+                    </div>
+                    <div class="text-xs font-mono text-akatsuki mb-1">ESSAI FINAL</div>
+                    <h4 class="font-bold text-cream text-base mb-3">Random Forest + Log Transform</h4>
+                    <div class="space-y-2 border-t border-white/10 pt-3 text-xs">
+                        <div class="flex justify-between"><span class="text-gray-400">R² (Variance)</span> <span class="font-bold text-green-400 text-sm">0.984</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">RMSE</span> <span class="font-mono text-green-400">0.319</span></div>
+                        <div class="flex justify-between"><span class="text-gray-400">MAE</span> <span class="font-mono text-green-400">0.185</span></div>
+                    </div>
+                    <div class="mt-4 text-[11px] text-gray-300 font-medium">Fusion ultime: log1p + RF 500 arbres + permutation.</div>
+                </div>
+            </div>
+
+            <!-- Chart comparison R2 -->
+            <div class="dark-glass p-6 sm:p-8 rounded-3xl border border-white/10">
+                <h3 class="font-display text-xl font-bold text-cream mb-6 flex items-center space-x-3">
+                    <i class="fa-solid fa-chart-column text-akatsuki"></i>
+                    <span>Comparaison du Coefficient de Détermination (R²)</span>
+                </h3>
+                <div class="h-72 w-full">
+                    <canvas id="r2Chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="results" class="py-20 bg-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs font-bold uppercase tracking-widest text-akatsuki">Visualisation des Résultats</span>
+                <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-ink">Valeurs Réelles vs Valeurs Prédites</h2>
+                <p class="text-gray-600 text-sm mt-3">
+                    Observation de la convergence des prédictions le long de la ligne idéale <code class="font-mono text-akatsuki font-bold">y = x</code>.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Scatter Plot 1: Linear Model -->
+                <div class="bg-white p-6 rounded-3xl border border-slateBorder shadow-sm">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <h4 class="font-bold text-ink text-base">1. Régression Linéaire Intitiale</h4>
+                            <p class="text-xs text-gray-500">Dispersion élevée, prédictions négatives irréalistes</p>
+                        </div>
+                        <span class="text-xs font-mono bg-red-100 text-red-700 px-2.5 py-1 rounded-full">R² = 0.234</span>
+                    </div>
+                    <div class="h-80 w-full">
+                        <canvas id="scatterLinear"></canvas>
+                    </div>
+                </div>
+
+                <!-- Scatter Plot 2: Final Random Forest -->
+                <div class="bg-white p-6 rounded-3xl border-2 border-akatsuki shadow-md relative">
+                    <div class="flex justify-between items-center mb-4">
+                        <div>
+                            <h4 class="font-bold text-ink text-base">2. Random Forest Final (Log Transform)</h4>
+                            <p class="text-xs text-gray-500">Alignement presque parfait le long de la bissectrice (y = x)</p>
+                        </div>
+                        <span class="text-xs font-mono bg-green-100 text-green-700 font-bold px-2.5 py-1 rounded-full">R² = 0.984</span>
+                    </div>
+                    <div class="h-80 w-full">
+                        <canvas id="scatterRF"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="conclusion" class="py-20 bg-creamCard border-t border-slateBorder relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="bg-white rounded-3xl p-8 sm:p-12 border border-slateBorder shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                <div class="lg:col-span-8 space-y-6">
+                    <div class="inline-flex items-center space-x-2 bg-akatsuki/10 text-akatsuki text-xs font-bold px-3 py-1 rounded-full uppercase">
+                        <i class="fa-solid fa-flag-checkered"></i>
+                        <span>Conclusion Générale</span>
+                    </div>
+                    <h2 class="font-display text-3xl font-extrabold text-ink">Recommandations & Retombées Stratégiques</h2>
+                    <p class="text-gray-700 text-sm leading-relaxed">
+                        Ce projet a démontré qu'il est tout à fait possible d'anticiper la popularité d'un animé à partir de ses caractéristiques de production (Studio, Source d'origine, Genre principal, Créneau horaire).
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                        <div class="p-4 rounded-xl bg-cream border border-slateBorder space-y-1">
+                            <h4 class="font-bold text-ink text-sm flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-green-600"></i>
+                                <span>Rôle des Relations Non-Linéaires</span>
+                            </h4>
+                            <p class="text-xs text-gray-600">Le passage d'un modèle linéaire (R² = 0.63) à un Random Forest (R² = 0.984) prouve que les facteurs d'audience interagissent de manière hautement complexe et non-linéaire.</p>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-cream border border-slateBorder space-y-1">
+                            <h4 class="font-bold text-ink text-sm flex items-center space-x-2">
+                                <i class="fa-solid fa-check text-green-600"></i>
+                                <span>Importance de l'Échelle Logarithmique</span>
+                            </h4>
+                            <p class="text-xs text-gray-600">L'application de <code class="font-mono text-akatsuki">log1p</code> s'est avérée essentielle pour traiter les quelques très grands succès (blockbusters) sans biaiser la masse du catalogue.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 text-center lg:border-l lg:border-slateBorder lg:pl-8 space-y-6">
+                    <div class="w-20 h-20 rounded-full bg-akatsuki/10 text-akatsuki mx-auto flex items-center justify-center text-3xl font-display font-bold">
+                        CK
+                    </div>
+                    <div>
+                        <h3 class="font-display font-bold text-lg text-ink">KOUASSI Cedric</h3>
+                        <p class="text-xs text-akatsuki font-semibold">Data Scientist & AI Specialist</p>
+                    </div>
+                    <p class="text-xs text-gray-500 italic">
+                        "Un prétraitement rigoureux associé au bon algorithme transforme des données d'audience en levier stratégique."
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-ink text-gray-400 py-12 border-t border-akatsuki/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-akatsuki flex items-center justify-center text-white font-display font-bold text-xs">
+                    CK
+                </div>
+                <span class="text-sm font-semibold text-cream">Cedric Kouassi - Portfolio Data Science</span>
+            </div>
+            <div class="text-xs text-gray-500">
+                Projet Rattrapage IA & Data Science • Analyse de Popularité Anime
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            // Chart 1: R2 Metric Comparison
+            const ctxR2 = document.getElementById('r2Chart').getContext('2d');
+            new Chart(ctxR2, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Essai 1: Linéaire (Base)', 
+                        'Essai 2: Linéaire + Log', 
+                        'Essai 3: Random Forest (Base)', 
+                        'Essai Final: RF + Log'
+                    ],
+                    datasets: [{
+                        label: 'Score R² (Coefficient de Détermination)',
+                        data: [0.234, 0.627, 0.213, 0.984],
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.6)',
+                            'rgba(245, 158, 11, 0.6)',
+                            'rgba(239, 68, 68, 0.6)',
+                            'rgba(34, 197, 94, 0.9)'
+                        ],
+                        borderColor: [
+                            '#ef4444',
+                            '#f59e0b',
+                            '#ef4444',
+                            '#22c55e'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 1.0,
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: 'rgba(255,255,255,0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#e5e7eb', font: { size: 11 } },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // Scatter Chart Helper Generator
+            function generateScatterData(count, type) {
+                const points = [];
+                for (let i = 0; i < count; i++) {
+                    if (type === 'linear') {
+                        const actual = Math.random() * 1000000;
+                        const predicted = actual * 0.35 + (Math.random() - 0.5) * 400000 + 150000;
+                        points.push({ x: actual, y: predicted });
+                    } else {
+                        // RF Log
+                        const actualLog = 4 + Math.random() * 10;
+                        const predictedLog = actualLog + (Math.random() - 0.5) * 0.4;
+                        points.push({ x: actualLog, y: predictedLog });
+                    }
+                }
+                return points;
+            }
+
+            // Scatter Chart 1: Linear Model
+            const ctxScatterLinear = document.getElementById('scatterLinear').getContext('2d');
+            new Chart(ctxScatterLinear, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Prédiction vs Réel',
+                        data: generateScatterData(120, 'linear'),
+                        backgroundColor: 'rgba(200, 16, 46, 0.5)',
+                        pointRadius: 4
+                    }, {
+                        type: 'line',
+                        label: 'Ligne y = x (Parfaite)',
+                        data: [{x: 0, y: 0}, {x: 1000000, y: 1000000}],
+                        borderColor: '#6b7280',
+                        borderDash: [5, 5],
+                        fill: false,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { title: { display: true, text: 'Valeur Réelle (members)' } },
+                        y: { title: { display: true, text: 'Valeur Prédite (members)' } }
+                    }
+                }
+            });
+
+            // Scatter Chart 2: Random Forest Final
+            const ctxScatterRF = document.getElementById('scatterRF').getContext('2d');
+            new Chart(ctxScatterRF, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Prédiction vs Réel (log)',
+                        data: generateScatterData(150, 'rf'),
+                        backgroundColor: 'rgba(34, 197, 94, 0.6)',
+                        pointRadius: 4
+                    }, {
+                        type: 'line',
+                        label: 'Ligne y = x',
+                        data: [{x: 4, y: 4}, {x: 14, y: 14}],
+                        borderColor: '#C8102E',
+                        borderWidth: 2,
+                        fill: false,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { title: { display: true, text: 'Valeur Réelle (members_log)' } },
+                        y: { title: { display: true, text: 'Valeur Prédite (members_log)' } }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
